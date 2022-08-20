@@ -10,10 +10,6 @@ const app = require('./app');
 app.use(cors());
 
 // Define options object for DB connection
-console.log(process.env.DB_DATABASE);
-console.log(process.env.DB_USERNAME);
-console.log(process.env.DB_PASSWORD);
-console.log(process.env.DB_URI);
 
 const options = {
   dbName: process.env.DB_DATABASE,
