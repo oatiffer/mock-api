@@ -12,7 +12,7 @@ router.post('/', userController.store);
 
 router.get('/:id', userController.show);
 
-router.put('/:id', userController.update);
+router.patch('/:id', userController.update);
 
 router.delete('/:id', userController.destroy);
 

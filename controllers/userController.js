@@ -2,18 +2,32 @@ const User = require('../models/User');
 
 // Get a list of users
 async function index(req, res) {
-  const queryObj = { ...req.query };
+  let queryObj = { ...req.query };
   const excludedFields = ['page', 'sort', 'limit', 'fields'];
   excludedFields.forEach((el) => delete queryObj[el]);
 
-  let queryString = JSON.stringify(queryObj);
-  queryString = queryString.replace(
-    /\b(gt|gte|lt|lte)\b/g,
-    (match) => `$${match}`
-  );
+  if (Object.keys(queryObj).length === 1) {
+    queryObj = Object.entries(queryObj).map(([key, val]) => {
+      const obj = { [key]: { $regex: new RegExp(val), $options: 'i' } };
+      return obj;
+    })[0];
+  } else if (Object.keys(queryObj).length > 1) {
+    queryObj = Object.entries(queryObj).reduce(([pKey, pVal], [cKey, cVal]) => {
+      let obj = { [cKey]: { $regex: new RegExp(cVal), $options: 'i' } };
+      obj = { ...obj, [pKey]: { $regex: new RegExp(pVal), $options: 'i' } };
+      return obj;
+    });
+  }
 
   try {
-    const users = await User.find(JSON.parse(queryString));
+    const users = await User.find(queryObj);
+
+    // if (Object.keys(queryObj).length) {
+    //   users = users.filter((user) =>
+    //     user.name.toLowerCase().includes(queryObj.name.toLowerCase())
+    //   );
+    // }
+
     res.status(200).json({
       status: 'success',
       results: users.length,
@@ -62,7 +76,7 @@ async function show(req, res) {
 // Update the specified user
 async function update(req, res) {
   try {
-    const user = User.findbyIdAndUpdate(req.params.id, req.body, {
+    const user = await User.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
     });

@@ -1,13 +1,7 @@
 require('dotenv/config');
 
-const cors = require('cors');
 const mongoose = require('mongoose');
-
 const app = require('./app');
-
-// Server Middlewares
-
-app.use(cors());
 
 // Define options object for DB connection
 
