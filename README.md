@@ -1,2 +1,2 @@
-# nicadev-api
+# mock-api
 Mock API for JSONPlaceholder
