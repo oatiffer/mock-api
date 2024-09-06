@@ -4,7 +4,7 @@ LABEL Author="Omar Tiffer"
 
 ENV PORT=3000
 ENV DB_DATABASE=mockapi
-ENV DB_URI=database
+ENV DB_URI=mongodb://mongo
 
 WORKDIR /usr/src/app
 

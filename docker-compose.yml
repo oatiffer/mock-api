@@ -2,6 +2,7 @@ services:
   backend:
     build:
       context: .
+    container_name: mock-api
     ports:
       - 3000:3000
     networks:
@@ -12,14 +13,12 @@ services:
       - database
   database:
     image: mongo
+    container_name: mongo
     networks:
       - mock-api-net
     volumes:
-      - mongo-data:./db
+      - ./db:/data/db
 
 networks:
   mock-api-net:
     driver: bridge
-
-volumes:
-  mongo-data:
