@@ -7,8 +7,8 @@ const app = require('./app');
 
 const options = {
   dbName: process.env.DB_DATABASE,
-  user: process.env.DB_USERNAME,
-  pass: process.env.DB_PASSWORD,
+  // user: process.env.DB_USERNAME,
+  // pass: process.env.DB_PASSWORD,
 };
 
 // Connect to DB
