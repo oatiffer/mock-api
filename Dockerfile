@@ -8,11 +8,11 @@ ENV DB_URI=mongodb://mongodb
 
 WORKDIR /usr/src/app
 
-COPY ./package.json .
-COPY ./package-lock.json .
-RUN  npm install
+# COPY ./package.json .
+# COPY ./package-lock.json .
+# RUN  npm install
 
-COPY . .
+# COPY . .
 
 EXPOSE ${PORT}
 
