@@ -4,13 +4,13 @@ LABEL Author="Omar Tiffer"
 
 ENV PORT=3000
 ENV DB_DATABASE=mockapi
-ENV DB_URI=mongodb://mongo
+ENV DB_URI=mongodb://mongodb
 
 WORKDIR /usr/src/app
 
 COPY ./package.json .
 COPY ./package-lock.json .
-RUN npm install
+RUN  npm install
 
 COPY . .
 
