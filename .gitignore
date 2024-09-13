@@ -105,3 +105,6 @@ dist
 
 # Mongo db folder
 db/
+
+# prod folder
+prod

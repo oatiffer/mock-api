@@ -1,20 +1,22 @@
 services:
-  backend:
+  backend-dev:
     build:
       context: .
-    image: mock-api
-    container_name: mock-api
+    image: mock-api:dev
+    container_name: mock-api-dev
+    env_file:
+      - ./.env
     ports:
-      - 3000:3000
+      - 3000:$PORT
     networks:
       - mock-api-net
     volumes:
       - .:/usr/src/app
     depends_on:
-      - database
-  database:
+      - database-dev
+  database-dev:
     image: mongo
-    container_name: mongodb
+    container_name: mongodb-dev
     networks:
       - mock-api-net
     volumes:
